@@ -1,0 +1,27 @@
+{
+  "id": "./index.html",
+  "name": "Repères A1 — Heure, calendrier, météo",
+  "short_name": "Repères A1",
+  "description": "Un parcours oral de français A1 pour lire l’heure, parler des jours, des mois, des saisons et de la météo.",
+  "lang": "fr-FR",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f5f7fb",
+  "theme_color": "#14243f",
+  "icons": [
+    {
+      "src": "./icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

@@ -1,0 +1,507 @@
+<!doctype html>
+<html lang="fr"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#14243f"><meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Repères A1">
+<meta name="description" content="Apprendre l’heure, les jours, les mois, les saisons et la météo en français A1.">
+<link rel="manifest" href="./manifest.webmanifest"><link rel="icon" href="./icon-192.png" type="image/png">
+<title>Repères A1 — Heure, calendrier, météo</title>
+<style>
+:root{--ink:#172b45;--muted:#607186;--navy:#14243f;--blue:#3559ce;--blue2:#e9efff;--teal:#17a58b;--cream:#fff7e9;--paper:#f5f7fb;--line:#dfe6ef;--shadow:0 8px 24px #182c4710}
+*{box-sizing:border-box}html{font-size:16px}body{margin:0;background:#e6ebf4;color:var(--ink);font:16px/1.45 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-tap-highlight-color:transparent}button{font:inherit;cursor:pointer;touch-action:manipulation}button:focus-visible,input:focus-visible{outline:3px solid #ffb34d;outline-offset:3px}
+.app{width:100%;max-width:540px;height:100dvh;min-height:580px;margin:auto;background:var(--paper);display:flex;flex-direction:column;overflow:hidden;box-shadow:0 10px 38px #14243f22}
+.topbar{height:62px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:9px 15px;background:var(--navy);color:#fff}.brand{display:flex;align-items:center;gap:9px;font-weight:950}.brand-logo{display:grid;place-items:center;width:38px;height:38px;border-radius:12px;background:#233a61;font-size:1.1rem}.brand small{display:block;color:#c9d5e8;font-size:.68rem;letter-spacing:.04em;font-weight:750}.lang-chip{border:1px solid #4d6282;background:#1c3152;color:#fff;border-radius:999px;padding:7px 11px;font-size:.78rem;font-weight:850}
+main{min-height:0;flex:1;overflow-y:auto;overscroll-behavior:contain;padding:15px 15px 24px;scroll-behavior:smooth}.screen{display:none;animation:appear .16s ease}.screen.active{display:block}@keyframes appear{from{opacity:.6;transform:translateY(3px)}to{opacity:1;transform:none}}
+h1,h2,h3,p{margin-top:0}h1{font-size:1.5rem;line-height:1.15;color:var(--navy);margin-bottom:8px}h2{font-size:1.08rem;line-height:1.25;color:var(--navy);margin:16px 0 7px}p{margin-bottom:9px}.lead{font-size:.98rem;color:#40556e;font-weight:650}.kicker{font-size:.73rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:950;margin-bottom:7px}
+.hero{position:relative;overflow:hidden;background:linear-gradient(140deg,#2948ad,#556ce1);border-radius:21px;padding:19px;color:#fff;box-shadow:0 5px 0 #223a91;margin-bottom:14px}.hero:after{content:"";position:absolute;right:-34px;top:-57px;width:148px;height:148px;border-radius:50%;background:#ffffff17}.hero h1{color:#fff;font-size:1.58rem;max-width:370px}.hero p{margin:0;color:#eff2ff;font-weight:700;max-width:410px}.hero-icon{font-size:1.75rem;margin-bottom:4px}.hero .support{color:#fff}
+.support{display:block;margin-top:5px;color:#455a74;font-size:.85rem;line-height:1.4;font-weight:650}.support:empty{display:none}[dir=rtl]{text-align:right}[dir=rtl].support{text-align:right}
+.lang-prompt{margin:12px 0;padding:12px 14px;background:#edf2ff;border-radius:14px;color:#354c68;font-weight:700}.lang-prompt p{margin:0 0 6px;font-size:.87rem}.lang-prompt p:last-child{margin:0}
+.lang-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:15px 0}.lang-button{min-height:66px;text-align:left;padding:10px 13px;border:1px solid var(--line);border-bottom:4px solid #cdd8e8;border-radius:15px;background:#fff;color:var(--navy);font-weight:900;box-shadow:var(--shadow)}.lang-button small{display:block;color:var(--muted);font-size:.76rem;font-weight:700}
+.pill{display:inline-flex;align-items:center;gap:6px;background:#eaf8f4;color:#11745f;border-radius:99px;padding:5px 9px;font-size:.73rem;font-weight:950}.objective{display:flex;align-items:flex-start;gap:11px;margin:12px 0;padding:13px;background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow)}.objective-icon{width:39px;height:39px;flex:none;display:grid;place-items:center;border-radius:13px;background:#edf1ff;font-size:1.3rem}.objective strong{display:block;font-size:.91rem;color:#253950}.objective p{margin:2px 0 0;color:var(--muted);font-size:.86rem}
+.section-tag{margin:17px 2px 7px;color:#68788b;font-size:.73rem;font-weight:950;text-transform:uppercase;letter-spacing:.08em}.mission{width:100%;display:flex;gap:11px;align-items:center;text-align:left;padding:13px;margin:9px 0;border:1px solid var(--line);border-bottom:4px solid #d0d9e7;border-radius:17px;background:#fff;color:var(--ink);box-shadow:var(--shadow)}.mission-icon{width:46px;height:46px;flex:none;display:grid;place-items:center;border-radius:14px;background:#f0f3ff;font-size:1.45rem}.mission-copy{flex:1;min-width:0}.mission-title{font-weight:900;display:block;line-height:1.2}.mission-desc{color:var(--muted);font-size:.82rem;display:block;margin-top:3px}.mission-arrow{font-size:1.3rem;color:var(--blue);font-weight:900}.mission.done{border-color:#b7e5d8;background:#f2fbf7}
+.info{margin:12px 0;padding:12px 13px;border-radius:15px;background:var(--cream);border:1px solid #f1dfa9;color:#5b4b27;font-size:.88rem}.info strong{display:block;margin-bottom:3px;color:#59451a}
+.progress-top{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:7px}.progress-label{font-size:.79rem;font-weight:900;color:var(--muted)}.progress-track{height:7px;background:#e0e6f0;border-radius:99px;overflow:hidden}.progress-fill{height:100%;background:linear-gradient(90deg,var(--teal),#68c8ae);border-radius:99px;transition:width .25s ease}.step-title{font-size:1.3rem;margin:14px 0 6px}.step-guide{margin:0;color:#475c72;font-weight:680}
+.card{padding:13px;margin:10px 0;background:#fff;border:1px solid var(--line);border-radius:17px;box-shadow:var(--shadow)}.vocab-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0}.vocab-card{min-width:0;padding:10px 9px;background:#fff;border:1px solid var(--line);border-bottom:3px solid #d0dae9;border-radius:14px;text-align:center}.vocab-face{font-size:1.12rem;font-weight:950;color:var(--navy);margin-bottom:2px}.vocab-fr{font-size:.84rem;font-weight:800;line-height:1.25}.vocab-controls{display:flex;justify-content:center;gap:6px;margin-top:7px}.icon-button{width:37px;height:36px;border:1px solid #d7e1f1;border-radius:11px;background:#f7f9ff;color:var(--blue);font-size:.95rem;font-weight:900}.vocab-note{margin:8px 2px;color:var(--muted);font-size:.79rem}
+.dialogue-card{padding:7px 12px;margin:10px 0;background:#fff;border:1px solid var(--line);border-radius:17px;box-shadow:var(--shadow)}.dialogue-line{display:grid;grid-template-columns:36px minmax(0,1fr) 37px 37px;gap:7px;align-items:center;padding:9px 0;border-bottom:1px solid #edf0f5}.dialogue-line:last-child{border-bottom:0}.avatar{width:34px;height:34px;display:grid;place-items:center;border-radius:12px;background:#e9eeff;color:#304aa7;font-size:.8rem;font-weight:950}.avatar.alt{background:#e1f7f1;color:#10725c}.line-fr{font-weight:800;font-size:.92rem}.line-meta{font-size:.68rem;color:var(--muted);font-weight:800;margin-bottom:2px}
+.question-card{padding:14px;margin:10px 0;background:#fff;border:1px solid var(--line);border-radius:17px}.question-fr{font-size:1.02rem;font-weight:900;color:var(--navy);margin:0 0 3px}.choice-list{display:grid;gap:8px;margin:12px 0}.choice{width:100%;display:flex;align-items:center;gap:10px;text-align:left;padding:11px 12px;border:1px solid var(--line);border-bottom:4px solid #d0dae9;border-radius:14px;background:#fff;color:var(--ink);font-weight:820}.choice-mark{width:27px;height:27px;display:grid;place-items:center;border-radius:9px;background:#eef2f7;color:#54687f;font-size:.78rem;font-weight:950;flex:none}.choice.correct{border-color:#85d3b7;background:#f1fbf7}.choice.wrong{border-color:#f1c6a0;background:#fff9ee}.feedback{padding:11px 12px;margin:10px 0;border-radius:13px;background:#eaf8f2;border:1px solid #ccebdd;color:#16644e;font-weight:820}.feedback.error{background:#fff7e9;border-color:#f0dfaf;color:#73571c}.feedback p{margin:0}
+.model-box{padding:13px 14px;background:#f0f4ff;border:1px solid #d8e1ff;border-radius:15px;font-size:1.04rem;font-weight:900;color:#283f91}.model-l1{padding:9px 11px;margin-top:7px;border-radius:12px;background:#f7f9fc;color:#435871}.mic-button{width:100%;min-height:56px;padding:10px 11px;border:0;border-bottom:4px solid #0c775f;border-radius:15px;background:var(--teal);color:#fff;font-weight:950}.mic-button.recording{background:#d7575c;border-color:#a73a41}.audio-button,.toggle-help,.hint-button{min-height:43px;border:1px solid #d7dfec;border-radius:12px;background:#fff;color:#344d68;font-size:.82rem;font-weight:850;padding:8px 10px}.toggle-help{background:var(--blue2);color:#344d9c;border:0}.hint-button{background:#fff9ea;color:#755c20;border-color:#e6dcbd}.turn-card{padding:15px;border-radius:17px;background:#fff;border:1px solid var(--line);box-shadow:var(--shadow);margin:12px 0}.turn-label{display:inline-block;padding:4px 8px;border-radius:99px;background:#edf1ff;color:#334caa;font-size:.7rem;font-weight:950;margin-bottom:8px}.turn-prompt{font-size:1.12rem;font-weight:900;line-height:1.3;color:#253950;margin-bottom:5px}.turn-controls{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0}.transcript{padding:10px 12px;background:#f4f6fa;border-radius:12px;margin:8px 0;color:#2f435a;font-weight:750;min-height:40px}.transcript:empty{display:none}
+.final-cues{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:13px 0}.cue{padding:11px 6px;text-align:center;border-radius:15px;background:#fff;border:1px solid var(--line)}.cue-icon{font-size:1.35rem;display:block;margin-bottom:5px}.cue-label{font-size:.75rem;color:#40556d;font-weight:850}.self-list{display:grid;gap:8px;margin:13px 0}.self-row{display:flex;gap:8px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:12px;padding:9px 11px;font-size:.87rem;font-weight:750}.self-row input{width:19px;height:19px;accent-color:var(--teal);flex:none}
+.primary{width:100%;min-height:51px;padding:11px 14px;border:0;border-bottom:4px solid #243b97;border-radius:15px;background:var(--blue);color:#fff;font-weight:950;font-size:.98rem}.secondary{width:100%;min-height:47px;padding:9px 12px;border:1px solid var(--line);border-bottom:3px solid #cfd9e7;border-radius:14px;background:#fff;color:#385170;font-weight:850;margin-top:8px}
+.nav{display:flex;gap:7px;padding:8px 9px calc(9px + env(safe-area-inset-bottom));background:#fff;border-top:1px solid var(--line);z-index:4}.nav[hidden]{display:none}.nav button{flex:1;min-width:0;min-height:48px;border:0;border-radius:12px;background:#f4f6fa;color:#40546b;font-weight:850}.nav button span{display:block;font-size:1.08rem;line-height:1.1}.nav button small{display:block;font-size:.72rem}.status{position:fixed;left:50%;bottom:74px;transform:translateX(-50%);width:min(92%,470px);padding:10px 12px;border-radius:12px;background:#14243f;color:#fff;box-shadow:0 5px 18px #0003;font-size:.84rem;font-weight:750;opacity:0;pointer-events:none;transition:opacity .18s;z-index:9}.status.show{opacity:1}.footer{font-size:.76rem;color:#67788b;margin:16px 2px 5px}
+@media(min-width:700px){body{padding:18px 0}.app{height:calc(100dvh - 36px);min-height:650px;border-radius:24px}.topbar{border-radius:24px 24px 0 0}}@media(max-width:360px){main{padding:12px 11px 20px}.topbar{padding:8px 11px}.hero{padding:16px}.lang-grid{gap:7px}.lang-button{padding:9px}.dialogue-line{grid-template-columns:31px minmax(0,1fr) 34px 34px;gap:5px}.vocab-grid{gap:6px}.vocab-card{padding:8px 6px}}
+</style></head>
+<body><div class="app">
+<header class="topbar"><div class="brand"><span class="brand-logo" aria-hidden="true">⏱</span><span>Repères A1<small>FRANÇAIS ORAL · AU LYCÉE</small></span></div><button class="lang-chip" type="button" data-action="language"><span aria-hidden="true">🌐 </span><span id="current-language">Langue</span></button></header>
+<main id="main">
+<section id="view-language" class="screen active" aria-labelledby="language-title"><div class="kicker">CHOISIS TON AIDE</div><h1 id="language-title" tabindex="-1">Quelle langue t’aide à comprendre ?</h1><p class="lead">Tu vas apprendre à dire l’heure, la date et le temps qu’il fait.</p><div class="lang-prompt"><p>اختر اللغة التي تساعدك على الفهم</p><p>د پوهېدو لپاره خپله د مرستې ژبه وټاکئ</p><p>აირჩიე ენა, რომელიც გაგებაში გეხმარება</p><p>Anlamana yardımcı olan dili seç</p></div><div class="lang-grid"><button class="lang-button" type="button" data-language="ar">العربية <small>Arabe</small></button><button class="lang-button" type="button" data-language="ps">پښتو <small>Pachto</small></button><button class="lang-button" type="button" data-language="ka">ქართული <small>Géorgien</small></button><button class="lang-button" type="button" data-language="tr">Türkçe <small>Turc</small></button></div><div class="info"><strong>Les réponses se font en français.</strong> La langue choisie t’aide à comprendre les mots et les consignes.</div></section>
+<section id="view-home" class="screen" aria-labelledby="home-title"><div class="hero"><div class="hero-icon" aria-hidden="true">🗓️　🌦️</div><div class="kicker" style="color:#dbe3ff">PARCOURS A1 · REPÈRES DU QUOTIDIEN</div><h1 id="home-title" tabindex="-1">L’heure, la date et la météo</h1><p>Écoute. Observe. Répète. Puis parle sans modèle.<span class="support" data-aid="homeIntro"></span></p></div><span class="pill">🎯 5 missions · 10 minutes chacune</span><div class="objective"><span class="objective-icon" aria-hidden="true">🧭</span><div><strong>À la fin, tu peux…</strong><p>dire l’heure, parler de la semaine et de l’année, décrire le temps et organiser un rendez-vous.<span class="support" data-aid="homeGoal"></span></p></div></div><div class="section-tag">CHOISIS UNE MISSION · DANS L’ORDRE OU À TON RYTHME</div>
+<button class="mission" type="button" data-start="time"><span class="mission-icon">🕣</span><span class="mission-copy"><span class="mission-title">Lire l’heure</span><span class="mission-desc">Demander l’heure et parler d’un cours.</span><span class="support" data-aid="goalTime"></span></span><span class="mission-arrow">›</span></button>
+<button class="mission" type="button" data-start="days"><span class="mission-icon" style="background:#e8faf5">📅</span><span class="mission-copy"><span class="mission-title">Les jours de la semaine</span><span class="mission-desc">Dire quel jour a lieu une activité.</span><span class="support" data-aid="goalDays"></span></span><span class="mission-arrow">›</span></button>
+<button class="mission" type="button" data-start="months"><span class="mission-icon" style="background:#fff4e3">🗓️</span><span class="mission-copy"><span class="mission-title">Les mois et les dates</span><span class="mission-desc">Donner un mois et une date.</span><span class="support" data-aid="goalMonths"></span></span><span class="mission-arrow">›</span></button>
+<button class="mission" type="button" data-start="weather"><span class="mission-icon" style="background:#eaf5ff">🌧️</span><span class="mission-copy"><span class="mission-title">Les saisons et le temps qu’il fait</span><span class="mission-desc">Décrire la météo et choisir une activité.</span><span class="support" data-aid="goalWeather"></span></span><span class="mission-arrow">›</span></button>
+<button class="mission" type="button" data-start="plan"><span class="mission-icon" style="background:#f4edff">🤝</span><span class="mission-copy"><span class="mission-title">Organiser une sortie</span><span class="mission-desc">Réunir jour, date, heure et météo.</span><span class="support" data-aid="goalPlan"></span></span><span class="mission-arrow">›</span></button>
+<div class="info"><strong>Une action à la fois.</strong> D’abord avec des exemples et ta langue d’appui, puis avec moins d’aide.</div><p class="footer">Tu peux réécouter les mots et ta voix. L’application ne conserve pas tes enregistrements après la séance.</p></section>
+<section id="view-lesson" class="screen" aria-labelledby="lesson-title"><div class="progress-top"><span class="progress-label" id="mission-name">Mission</span><span class="progress-label" id="step-count">1 / 6</span></div><div class="progress-track" aria-label="Progression"><div id="progress-fill" class="progress-fill" style="width:17%"></div></div><h1 id="lesson-title" class="step-title" tabindex="-1"></h1><p id="lesson-guide" class="step-guide"></p><span id="lesson-guide-aid" class="support"></span><div id="lesson-content"></div><div id="lesson-actions"></div></section>
+<section id="view-finish" class="screen" aria-labelledby="finish-title"><div class="hero" style="background:linear-gradient(140deg,#117a67,#25ad91);box-shadow:0 5px 0 #0c624f"><div class="hero-icon" aria-hidden="true">✓</div><div class="kicker" style="color:#d7fff4">MISSION TERMINÉE</div><h1 id="finish-title" tabindex="-1">Tu as utilisé tes repères en français !</h1><p>Tu peux refaire la mission ou en choisir une autre.</p><span class="support" data-aid="finishSupport"></span></div><div class="objective"><span class="objective-icon">✅</span><div><strong>Je peux maintenant…</strong><div class="self-list"><label class="self-row"><input type="checkbox"><span>comprendre une question simple</span></label><label class="self-row"><input type="checkbox"><span>répondre avec les mots travaillés</span></label><label class="self-row"><input type="checkbox"><span>demander ou proposer une information</span></label></div><span class="support" data-aid="selfCheck"></span></div></div><button class="primary" type="button" data-action="home"><span data-ui="home">Retour aux missions</span></button><button class="secondary" type="button" data-action="restart"><span data-ui="restart">Recommencer cette mission</span></button></section>
+</main>
+<nav id="navigation" class="nav" aria-label="Navigation" hidden><button type="button" data-action="back"><span aria-hidden="true">←</span><small data-ui="back">Retour</small></button><button type="button" data-action="home"><span aria-hidden="true">⌂</span><small data-ui="home">Accueil</small></button><button type="button" data-action="language"><span aria-hidden="true">🌐</span><small data-ui="language">Langue</small></button></nav><div id="status" class="status" role="status" aria-live="polite"></div>
+</div>
+<script>
+"use strict";
+/* Le serveur appelle Google TTS via cet adaptateur. Aucune clé API dans l'application. */
+const GOOGLE_TTS_CODES={fr:"fr-FR",ar:"ar-001",ps:"ps-AF",ka:"ka-GE",tr:"tr-TR"};
+const BROWSER_CODES={fr:"fr-FR",ar:"ar-SA",ps:"ps-AF",ka:"ka-GE",tr:"tr-TR"};
+const L1={
+ar:{name:"العربية",dir:"rtl",ui:{back:"رجوع",home:"المهام",language:"اللغة",next:"التالي",listen:"استمع",listenAll:"استمع إلى الحوار",listenAid:"استمع بلغتي",help:"أظهر المساعدة بلغتي",hide:"أخفِ المساعدة",speak:"تحدث",stop:"إيقاف",done:"أنهيت",restart:"أعد المهمة",playback:"استمع إلى تسجيلك"},text:{
+homeIntro:"اختر موضوعًا من الحياة اليومية في المدرسة وتدرّب على التحدث بالفرنسية.",homeGoal:"ستتعلم قول الوقت وأيام الأسبوع والأشهر والفصول، ووصف الطقس وتنظيم موعد.",goalTime:"اسأل عن الوقت وتحدث عن حصة دراسية.",goalDays:"قل في أي يوم يقام نشاط.",goalMonths:"اذكر شهرًا وتاريخًا.",goalWeather:"صف الطقس واختر نشاطًا مناسبًا.",goalPlan:"استخدم اليوم والتاريخ والوقت والطقس لتنظيم موعد.",guideVocab:"استمع إلى الكلمات. اضغط على مكبر الصوت. أظهر المساعدة بلغتك عند الحاجة.",guideListen:"استمع إلى الحوار. يمكنك سماع كل سطر أو الحوار كاملًا.",guideQuiz:"اختر الجواب المناسب للحوار.",guideRepeat:"استمع إلى المثال. كرر الجملة ثم سجل صوتك.",guideRole:"أجب شريكك بصوت عالٍ. يمكنك طلب تلميح.",guideFinal:"حان دورك. حاول التحدث من دون قراءة الحوار.",guideSelf:"ضع علامة على الجمل التي تستطيع قولها.",finishSupport:"أحسنت! استمعت وتحدثت بالفرنسية.",selfCheck:"ضع علامة على ما تستطيع فعله الآن.",
+qTime:"في أي ساعة يبدأ الدرس؟",qDays:"في أي يوم يقام نادي التصوير؟",qMonths:"أي شهر يأتي بعد مارس؟",qWeather:"كيف الطقس؟",qPlan:"الطقس ماطر. إلى أين يمكن أن نذهب؟",
+dTime1:"عذرًا، كم الساعة؟",dTime2:"الساعة الثامنة والنصف.",dTime3:"شكرًا. هل يبدأ الدرس في التاسعة؟",dTime4:"نعم، بعد ثلاثين دقيقة.",
+dDays1:"في أي يوم لدينا نشاط التصوير؟",dDays2:"يوم الأربعاء.",dDays3:"وماذا عن الغد؟",dDays4:"غدًا الخميس.",
+dMonths1:"متى الرحلة المدرسية؟",dMonths2:"في 14 مايو.",dMonths3:"وفي أي ساعة نلتقي؟",dMonths4:"في الساعة الثانية بعد الظهر.",
+dWeather1:"كيف الطقس اليوم؟",dWeather2:"الجو بارد وتمطر.",dWeather3:"هل نلعب في الخارج؟",dWeather4:"لا، لنذهب إلى المكتبة.",
+dPlan1:"متى نلتقي للنزهة؟",dPlan2:"يوم السبت، في الثامن عشر من أبريل، الساعة العاشرة.",dPlan3:"كيف سيكون الطقس؟",dPlan4:"ستمطر.",dPlan5:"لنذهب إلى المكتبة إذن.",
+time00:"الساعة الثامنة تمامًا.",time15:"الساعة الثامنة والربع.",time30:"الساعة الثامنة والنصف.",time45:"الساعة الثامنة وخمس وأربعون دقيقة.",answer9:"في الساعة التاسعة.",
+w_mon:"الاثنين",w_tue:"الثلاثاء",w_wed:"الأربعاء",w_thu:"الخميس",w_fri:"الجمعة",w_sat:"السبت",w_sun:"الأحد",w_today:"اليوم",w_tomorrow:"غدًا",w_yesterday:"أمس",
+m_jan:"يناير",m_feb:"فبراير",m_mar:"مارس",m_apr:"أبريل",m_may:"مايو",m_jun:"يونيو",m_jul:"يوليو",m_aug:"أغسطس",m_sep:"سبتمبر",m_oct:"أكتوبر",m_nov:"نوفمبر",m_dec:"ديسمبر",
+s_spring:"الربيع",s_summer:"الصيف",s_autumn:"الخريف",s_winter:"الشتاء",w_sunny:"الجو مشمس",w_hot:"الجو حار",w_cold:"الجو بارد",w_rain:"تمطر",w_wind:"هناك رياح",w_snow:"تتساقط الثلوج",
+planTime:"الساعة العاشرة صباحًا.",planDate:"يوم السبت، 18 أبريل.",planRain:"ستمطر.",planIndoor:"لنذهب إلى المكتبة.",qMonthAid:"أي شهر يأتي بعد أبريل؟",askTime:"اسأل زميلك عن الوقت.",qDayAid:"اليوم الثلاثاء. ما يوم الغد؟",
+repeatTime:"الساعة الثامنة والنصف.",repeatDays:"غدًا الخميس.",repeatMonths:"الرحلة في مايو.",repeatWeather:"اليوم تمطر.",repeatPlan:"نلتقي يوم السبت 18 أبريل، الساعة العاشرة.",
+finalTime:"قل الوقت: 8:30.",finalDay:"اليوم الثلاثاء. قل يوم الغد.",finalMonth:"قل الشهر الذي يأتي بعد أبريل.",finalWeather:"انظر إلى الصورة 🌧️. صف الطقس.",finalPlan1:"اقترح يومًا وتاريخًا ووقتًا: السبت، 18 أبريل، الساعة 10.",finalPlan2:"صف الطقس: 🌧️.",finalPlan3:"اقترح مكانًا مغلقًا.",
+good:"أحسنت! إجابتك مناسبة.",tryAgain:"استمع إلى المثال وحاول مرة أخرى.",manual:"استمعت إلى صوتك. ضع علامة على الجملة التي قلتها."
+}},
+ps:{name:"پښتو",dir:"rtl",ui:{back:"شاته",home:"دندې",language:"ژبه",next:"بل",listen:"واورئ",listenAll:"خبرې واورئ",listenAid:"په خپله ژبه واورئ",help:"په خپله ژبه مرسته ښکاره کړه",hide:"مرسته پټه کړه",speak:"خبرې وکړه",stop:"ودرېږه",done:"ما پای ته ورسوله",restart:"دا دنده بیا پیل کړه",playback:"خپل غږ واورئ"},text:{
+homeIntro:"د ښوونځي د ورځني ژوند یوه موضوع وټاکه او په فرانسوي خبرې تمرین کړه.",homeGoal:"وخت، د اونۍ ورځې، میاشتې او موسمونه ووایه، هوا بیان کړه او لیدنه برابره کړه.",goalTime:"وخت وپوښته او د درس په اړه خبرې وکړه.",goalDays:"ووایه چې یو فعالیت په کومه ورځ وي.",goalMonths:"میاشت او نېټه ووایه.",goalWeather:"هوا بیان کړه او مناسب فعالیت وټاکه.",goalPlan:"د لیدنې لپاره ورځ، نېټه، وخت او هوا وکاروه.",guideVocab:"کلمې واوره. د غږ تڼۍ کېکاږه. که اړتیا وي، مرسته په خپله ژبه ښکاره کړه.",guideListen:"خبرې واوره. هره کرښه یا ټولې خبرې اورېدلی شې.",guideQuiz:"د خبرو لپاره مناسب ځواب وټاکه.",guideRepeat:"بېلګه واوره. جمله تکرار کړه او خپل غږ ثبت کړه.",guideRole:"خپل ملګري ته په لوړ غږ ځواب ورکړه. اشاره غوښتلی شې.",guideFinal:"اوس ستا وار دی. هڅه وکړه له خبرو لوستلو پرته ووایې.",guideSelf:"هغه جملې نښه کړه چې ویلی یې شې.",finishSupport:"ډېر ښه! تا واورېدل او په فرانسوي دې خبرې وکړې.",selfCheck:"هغه څه نښه کړه چې اوس یې کولی شې.",
+qTime:"درس په کوم وخت پیلېږي؟",qDays:"د انځورګرۍ کلب په کومه ورځ وي؟",qMonths:"له مارچ وروسته کومه میاشت راځي؟",qWeather:"هوا څنګه ده؟",qPlan:"باران دی. چېرته تللی شو؟",
+dTime1:"بښنه غواړم، څو بجې دي؟",dTime2:"اته نیمې بجې دي.",dTime3:"مننه. درس په نهو بجو پیلېږي؟",dTime4:"هو، په دېرشو دقیقو کې.",
+dDays1:"د انځورګرۍ فعالیت مو په کومه ورځ دی؟",dDays2:"د چهارشنبې په ورځ.",dDays3:"او سبا؟",dDays4:"سبا پنجشنبه ده.",
+dMonths1:"د ښوونځي سفر څه وخت دی؟",dMonths2:"د مې په ۱۴مه.",dMonths3:"او په څو بجو سره ګورو؟",dMonths4:"د ماسپښین په دوو بجو.",
+dWeather1:"نن هوا څنګه ده؟",dWeather2:"هوا سړه ده او باران ورېږي.",dWeather3:"بهر لوبې کوو؟",dWeather4:"نه، کتابتون ته ځو.",
+dPlan1:"د چکر لپاره څه وخت سره ګورو؟",dPlan2:"د شنبې په ورځ، د اپرېل په اتلسمه، لس بجې.",dPlan3:"هوا به څنګه وي؟",dPlan4:"باران به وشي.",dPlan5:"نو کتابتون ته به ځو.",
+time00:"اته بجې پوره.",time15:"اته بجې او پنځلس دقیقې.",time30:"اته نیمې بجې.",time45:"اته بجې او پنځه څلوېښت دقیقې.",answer9:"په نهو بجو.",
+w_mon:"دوشنبه",w_tue:"سه شنبه",w_wed:"چهارشنبه",w_thu:"پنجشنبه",w_fri:"جمعه",w_sat:"شنبه",w_sun:"یکشنبه",w_today:"نن",w_tomorrow:"سبا",w_yesterday:"پرون",
+m_jan:"جنوري",m_feb:"فبروري",m_mar:"مارچ",m_apr:"اپرېل",m_may:"مې",m_jun:"جون",m_jul:"جولای",m_aug:"اګست",m_sep:"سپتمبر",m_oct:"اکتوبر",m_nov:"نومبر",m_dec:"دسمبر",
+s_spring:"پسرلی",s_summer:"اوړی",s_autumn:"منی",s_winter:"ژمی",w_sunny:"هوا لمرینه ده",w_hot:"هوا ګرمه ده",w_cold:"هوا سړه ده",w_rain:"باران ورېږي",w_wind:"باد چلېږي",w_snow:"واوره ورېږي",
+planTime:"سهار لس بجې.",planDate:"د شنبې ورځ، د اپرېل اتلسمه.",planRain:"باران به وشي.",planIndoor:"کتابتون ته به ځو.",qMonthAid:"له اپرېل وروسته کومه میاشت راځي؟",askTime:"له خپل ملګري څخه وخت وپوښته.",qDayAid:"نن سه شنبه ده. سبا کومه ورځ ده؟",
+repeatTime:"اته نیمې بجې دي.",repeatDays:"سبا پنجشنبه ده.",repeatMonths:"سفر په مې میاشت کې دی.",repeatWeather:"نن باران ورېږي.",repeatPlan:"د شنبې په ورځ، د اپرېل په اتلسمه، لس بجې سره ګورو.",
+finalTime:"وخت ووایه: ۸:۳۰.",finalDay:"نن سه شنبه ده. د سبا ورځ ووایه.",finalMonth:"له اپرېل وروسته میاشت ووایه.",finalWeather:"انځور ته وګوره 🌧️. هوا بیان کړه.",finalPlan1:"ورځ، نېټه او وخت وړاندیز کړه: شنبه، ۱۸ اپرېل، ۱۰ بجې.",finalPlan2:"هوا بیان کړه: 🌧️.",finalPlan3:"یو د کور دننه ځای وړاندیز کړه.",
+good:"ډېر ښه! ستا ځواب مناسب دی.",tryAgain:"بېلګه واوره او بیا هڅه وکړه.",manual:"خپل غږ دې واورېد. هغه جمله نښه کړه چې دې ویلې ده."
+}},
+ka:{name:"ქართული",dir:"ltr",ui:{back:"უკან",home:"მისიები",language:"ენა",next:"შემდეგი",listen:"მოსმენა",listenAll:"დიალოგის მოსმენა",listenAid:"მოსმენა ჩემს ენაზე",help:"დახმარება ჩემს ენაზე",hide:"დახმარების დამალვა",speak:"თქვი",stop:"შეჩერება",done:"დავასრულე",restart:"მისიის თავიდან დაწყება",playback:"ჩანაწერის მოსმენა"},text:{
+homeIntro:"აირჩიე ყოველდღიური სასკოლო თემა და ივარჯიშე მოკლე ფრანგული საუბრით.",homeGoal:"ისწავლი დროის, კვირის დღეების, თვეებისა და სეზონების თქმას, ამინდის აღწერას და შეხვედრის დაგეგმვას.",goalTime:"იკითხე დრო და ისაუბრე გაკვეთილზე.",goalDays:"თქვი, კვირის რომელ დღეს არის აქტივობა.",goalMonths:"დაასახელე თვე და თარიღი.",goalWeather:"აღწერე ამინდი და აირჩიე შესაფერისი აქტივობა.",goalPlan:"შეხვედრის დასაგეგმად გამოიყენე დღე, თარიღი, დრო და ამინდი.",guideVocab:"მოუსმინე სიტყვებს. დააჭირე ხმამაღლა მოსმენის ღილაკს. საჭიროებისას აჩვენე დახმარება შენს ენაზე.",guideListen:"მოუსმინე დიალოგს. შეგიძლია თითოეული ხაზი ან მთელი საუბარი მოისმინო.",guideQuiz:"აირჩიე დიალოგისთვის შესაფერისი პასუხი.",guideRepeat:"მოუსმინე ნიმუშს. გაიმეორე წინადადება და ჩაიწერე შენი ხმა.",guideRole:"ხმამაღლა უპასუხე თანაკლასელს. შეგიძლია მინიშნება ითხოვო.",guideFinal:"ახლა შენი ჯერია. სცადე პასუხი დიალოგის წაკითხვის გარეშე.",guideSelf:"მონიშნე წინადადებები, რომელთა თქმაც შეგიძლია.",finishSupport:"ყოჩაღ! მოუსმინე და ფრანგულად ისაუბრე.",selfCheck:"მონიშნე, რისი გაკეთება შეგიძლია ახლა.",
+qTime:"რომელ საათზე იწყება გაკვეთილი?",qDays:"კვირის რომელ დღეს არის ფოტოკლუბი?",qMonths:"რომელი თვე მოდის მარტის შემდეგ?",qWeather:"როგორი ამინდია?",qPlan:"წვიმს. სად შეიძლება წავიდეთ?",
+dTime1:"უკაცრავად, რომელი საათია?",dTime2:"რვის ნახევარია.",dTime3:"მადლობა. გაკვეთილი ცხრაზე იწყება?",dTime4:"კი, ოცდაათ წუთში.",
+dDays1:"რომელ დღეს გვაქვს ფოტოკლუბი?",dDays2:"ოთხშაბათს.",dDays3:"ხვალ კი?",dDays4:"ხვალ ხუთშაბათია.",
+dMonths1:"როდის არის სკოლის ექსკურსია?",dMonths2:"მაისის 14-ში.",dMonths3:"რომელ საათზე შევხვდეთ?",dMonths4:"შუადღის ორ საათზე.",
+dWeather1:"დღეს როგორი ამინდია?",dWeather2:"ცივა და წვიმს.",dWeather3:"გარეთ ვითამაშოთ?",dWeather4:"არა, ბიბლიოთეკაში წავიდეთ.",
+dPlan1:"ექსკურსიისთვის როდის შევხვდეთ?",dPlan2:"შაბათს, 18 აპრილს, დილის ათ საათზე.",dPlan3:"როგორი ამინდი იქნება?",dPlan4:"იწვიმებს.",dPlan5:"მაშინ ბიბლიოთეკაში წავიდეთ.",
+time00:"ზუსტად რვა საათია.",time15:"რვა საათი და თხუთმეტი წუთია.",time30:"რვის ნახევარია.",time45:"ცხრის თხუთმეტი წუთია.",answer9:"ცხრა საათზე.",
+w_mon:"ორშაბათი",w_tue:"სამშაბათი",w_wed:"ოთხშაბათი",w_thu:"ხუთშაბათი",w_fri:"პარასკევი",w_sat:"შაბათი",w_sun:"კვირა",w_today:"დღეს",w_tomorrow:"ხვალ",w_yesterday:"გუშინ",
+m_jan:"იანვარი",m_feb:"თებერვალი",m_mar:"მარტი",m_apr:"აპრილი",m_may:"მაისი",m_jun:"ივნისი",m_jul:"ივლისი",m_aug:"აგვისტო",m_sep:"სექტემბერი",m_oct:"ოქტომბერი",m_nov:"ნოემბერი",m_dec:"დეკემბერი",
+s_spring:"გაზაფხული",s_summer:"ზაფხული",s_autumn:"შემოდგომა",s_winter:"ზამთარი",w_sunny:"მზიანი ამინდია",w_hot:"ცხელა",w_cold:"ცივა",w_rain:"წვიმს",w_wind:"ქარია",w_snow:"თოვს",
+planTime:"დილის ათ საათზე.",planDate:"შაბათს, 18 აპრილს.",planRain:"იწვიმებს.",planIndoor:"ბიბლიოთეკაში წავიდეთ.",qMonthAid:"რომელი თვე მოდის აპრილის შემდეგ?",askTime:"თანაკლასელს ჰკითხე, რომელი საათია.",qDayAid:"დღეს სამშაბათია. რომელი დღე იქნება ხვალ?",
+repeatTime:"რვის ნახევარია.",repeatDays:"ხვალ ხუთშაბათია.",repeatMonths:"სკოლის ექსკურსია მაისშია.",repeatWeather:"დღეს წვიმს.",repeatPlan:"შაბათს, 18 აპრილს, ათ საათზე შევხვდეთ.",
+finalTime:"თქვი დრო: 8:30.",finalDay:"დღეს სამშაბათია. თქვი, რომელი დღე იქნება ხვალ.",finalMonth:"დაასახელე თვე, რომელიც აპრილის შემდეგ მოდის.",finalWeather:"შეხედე სურათს 🌧️. აღწერე ამინდი.",finalPlan1:"შესთავაზე დღე, თარიღი და დრო: შაბათი, 18 აპრილი, 10 საათი.",finalPlan2:"აღწერე ამინდი: 🌧️.",finalPlan3:"შესთავაზე დახურული ადგილი.",
+good:"ყოჩაღ! შენი პასუხი შესაფერისია.",tryAgain:"მოუსმინე ნიმუშს და კიდევ სცადე.",manual:"შენი ხმა მოისმინე. მონიშნე წინადადება, რომელიც თქვი."
+}},
+tr:{name:"Türkçe",dir:"ltr",ui:{back:"Geri",home:"Görevler",language:"Dil",next:"Sonraki",listen:"Dinle",listenAll:"Diyaloğu dinle",listenAid:"Kendi dilimde dinle",help:"Kendi dilimde yardım",hide:"Yardımı gizle",speak:"Konuş",stop:"Durdur",done:"Bitirdim",restart:"Görevi yeniden başlat",playback:"Kaydını dinle"},text:{
+homeIntro:"Okul yaşamından bir konu seç ve kısa Fransızca konuşmalarla pratik yap.",homeGoal:"Saati, haftanın günlerini, ayları ve mevsimleri söylemeyi, hava durumunu anlatmayı ve buluşma planlamayı öğreneceksin.",goalTime:"Saati sor ve bir ders hakkında konuş.",goalDays:"Bir etkinliğin hangi gün olduğunu söyle.",goalMonths:"Bir ay ve tarih söyle.",goalWeather:"Hava durumunu anlat ve uygun bir etkinlik seç.",goalPlan:"Buluşmayı planlamak için gün, tarih, saat ve hava durumunu kullan.",guideVocab:"Kelimeleri dinle. Hoparlöre dokun. Gerekirse kendi dilindeki yardımı aç.",guideListen:"Diyaloğu dinle. Her satırı ya da tamamını dinleyebilirsin.",guideQuiz:"Diyaloğa uygun cevabı seç.",guideRepeat:"Örneği dinle. Cümleyi tekrar et, sonra sesini kaydet.",guideRole:"Arkadaşına sesli cevap ver. İstersen ipucu iste.",guideFinal:"Şimdi sıra sende. Diyaloğu okumadan cevap vermeyi dene.",guideSelf:"Söyleyebildiğin cümleleri işaretle.",finishSupport:"Aferin! Dinledin ve Fransızca konuştun.",selfCheck:"Şimdi yapabildiğin şeyleri işaretle.",
+qTime:"Ders saat kaçta başlıyor?",qDays:"Fotoğraf kulübü hangi gün?",qMonths:"Marttan sonra hangi ay gelir?",qWeather:"Hava nasıl?",qPlan:"Yağmur yağıyor. Nereye gidebiliriz?",
+dTime1:"Affedersin, saat kaç?",dTime2:"Saat sekiz buçuk.",dTime3:"Teşekkürler. Ders saat dokuzda mı başlıyor?",dTime4:"Evet, otuz dakika sonra.",
+dDays1:"Fotoğraf kulübü hangi gün?",dDays2:"Çarşamba günü.",dDays3:"Peki yarın?",dDays4:"Yarın perşembe.",
+dMonths1:"Okul gezisi ne zaman?",dMonths2:"14 Mayısta.",dMonths3:"Saat kaçta buluşalım?",dMonths4:"Saat ikide.",
+dWeather1:"Bugün hava nasıl?",dWeather2:"Hava soğuk ve yağmur yağıyor.",dWeather3:"Dışarıda oynayalım mı?",dWeather4:"Hayır, kütüphaneye gidelim.",
+dPlan1:"Gezi için ne zaman buluşalım?",dPlan2:"Cumartesi, 18 Nisan, saat onda.",dPlan3:"Hava nasıl olacak?",dPlan4:"Yağmur yağacak.",dPlan5:"O zaman kütüphaneye gidelim.",
+time00:"Saat tam sekiz.",time15:"Saat sekizi çeyrek geçiyor.",time30:"Saat sekiz buçuk.",time45:"Saat dokuza çeyrek var.",answer9:"Saat dokuzda.",
+w_mon:"Pazartesi",w_tue:"Salı",w_wed:"Çarşamba",w_thu:"Perşembe",w_fri:"Cuma",w_sat:"Cumartesi",w_sun:"Pazar",w_today:"bugün",w_tomorrow:"yarın",w_yesterday:"dün",
+m_jan:"Ocak",m_feb:"Şubat",m_mar:"Mart",m_apr:"Nisan",m_may:"Mayıs",m_jun:"Haziran",m_jul:"Temmuz",m_aug:"Ağustos",m_sep:"Eylül",m_oct:"Ekim",m_nov:"Kasım",m_dec:"Aralık",
+s_spring:"ilkbahar",s_summer:"yaz",s_autumn:"sonbahar",s_winter:"kış",w_sunny:"Hava güneşli",w_hot:"Hava sıcak",w_cold:"Hava soğuk",w_rain:"Yağmur yağıyor",w_wind:"Rüzgâr var",w_snow:"Kar yağıyor",
+planTime:"Sabah saat onda.",planDate:"Cumartesi, 18 Nisan.",planRain:"Yağmur yağacak.",planIndoor:"Kütüphaneye gidelim.",qMonthAid:"Nisandan sonra hangi ay gelir?",askTime:"Arkadaşına saati sor.",qDayAid:"Bugün salı. Yarın hangi gün?",
+repeatTime:"Saat sekiz buçuk.",repeatDays:"Yarın perşembe.",repeatMonths:"Gezi mayısta.",repeatWeather:"Bugün yağmur yağıyor.",repeatPlan:"Cumartesi, 18 Nisanda saat onda buluşalım.",
+finalTime:"Saati söyle: 8.30.",finalDay:"Bugün salı. Yarın hangi gün, söyle.",finalMonth:"Nisandan sonra gelen ayı söyle.",finalWeather:"Resme bak 🌧️. Hava durumunu anlat.",finalPlan1:"Bir gün, tarih ve saat öner: cumartesi, 18 Nisan, saat 10.",finalPlan2:"Hava durumunu söyle: 🌧️.",finalPlan3:"Kapalı bir yer öner.",
+good:"Aferin! Cevabın uygun.",tryAgain:"Örneği dinle ve tekrar dene.",manual:"Sesini dinledin. Söylediğin cümleyi işaretle."
+}}
+};
+const DAYS=[
+ {face:"LUNDI",fr:"Lundi",aid:"w_mon",icon:"①"},{face:"MARDI",fr:"Mardi",aid:"w_tue",icon:"②"},
+ {face:"MERCREDI",fr:"Mercredi",aid:"w_wed",icon:"③"},{face:"JEUDI",fr:"Jeudi",aid:"w_thu",icon:"④"},
+ {face:"VENDREDI",fr:"Vendredi",aid:"w_fri",icon:"⑤"},{face:"SAMEDI",fr:"Samedi",aid:"w_sat",icon:"⑥"},
+ {face:"DIMANCHE",fr:"Dimanche",aid:"w_sun",icon:"⑦"},
+ {face:"AUJOURD’HUI",fr:"Aujourd’hui",aid:"w_today",icon:"📍"},
+ {face:"DEMAIN",fr:"Demain",aid:"w_tomorrow",icon:"➡️"},{face:"HIER",fr:"Hier",aid:"w_yesterday",icon:"⬅️"}
+];
+const MONTHS=[
+ "janvier","février","mars","avril","mai","juin","juillet","août","septembre","octobre","novembre","décembre"
+].map((fr,i)=>({face:String(i+1).padStart(2,"0"),fr:fr[0].toUpperCase()+fr.slice(1),aid:"m_"+["jan","feb","mar","apr","may","jun","jul","aug","sep","oct","nov","dec"][i]}));
+const WEATHER_WORDS=[
+ {face:"PRINTEMPS",fr:"Au printemps",aid:"s_spring",icon:"🌱"},{face:"ÉTÉ",fr:"En été",aid:"s_summer",icon:"☀️"},
+ {face:"AUTOMNE",fr:"En automne",aid:"s_autumn",icon:"🍂"},{face:"HIVER",fr:"En hiver",aid:"s_winter",icon:"❄️"},
+ {face:"SOLEIL",fr:"Il y a du soleil.",aid:"w_sunny",icon:"🌤️"},{face:"CHAUD",fr:"Il fait chaud.",aid:"w_hot",icon:"🌡️"},
+ {face:"FROID",fr:"Il fait froid.",aid:"w_cold",icon:"🧥"},{face:"PLUIE",fr:"Il pleut.",aid:"w_rain",icon:"🌧️"},
+ {face:"VENT",fr:"Il y a du vent.",aid:"w_wind",icon:"💨"},{face:"NEIGE",fr:"Il neige.",aid:"w_snow",icon:"🌨️"}
+];
+const LESSONS={
+ time:{
+  title:"Lire l’heure",icon:"🕣",goalAid:"goalTime",
+  vocab:[
+   {face:"08:00",fr:"Il est huit heures.",aid:"time00",icon:"🕗"},
+   {face:"08:15",fr:"Il est huit heures et quart.",aid:"time15",icon:"🕗"},
+   {face:"08:30",fr:"Il est huit heures et demie.",aid:"time30",icon:"🕣"},
+   {face:"08:45",fr:"Il est huit heures quarante-cinq.",aid:"time45",icon:"🕘"}
+  ],
+  dialogue:[
+   {speaker:"Sam",role:"A",fr:"Excuse-moi, il est quelle heure ?",aid:"dTime1"},
+   {speaker:"Noé",role:"B",fr:"Il est huit heures et demie.",aid:"dTime2"},
+   {speaker:"Sam",role:"A",fr:"Merci. Le cours commence à neuf heures ?",aid:"dTime3"},
+   {speaker:"Noé",role:"B",fr:"Oui, dans trente minutes.",aid:"dTime4"}
+  ],
+  quiz:{fr:"À quelle heure commence le cours ?",aid:"qTime",options:["À neuf heures.","Le mercredi.","En mai."],correct:0},
+  repeat:{fr:"Il est huit heures et demie.",aid:"repeatTime",pattern:"time830"},
+  turns:[
+   {fr:"Pardon, il est 8 h 30 ?",aid:"dTime1",target:"Il est huit heures trente.",hintAid:"repeatTime",pattern:"time830"},
+   {fr:"Le cours commence à quelle heure ?",aid:"dTime3",target:"À neuf heures.",hintAid:"answer9",pattern:"time900"}
+  ],
+  final:[
+   {icon:"🕣",fr:"Réponds : 8 h 30.",aid:"finalTime",pattern:"time830"},
+   {icon:"🔔",fr:"Le cours commence à 9 h. Dis l’heure.",aid:"dTime3",pattern:"time900"},
+   {icon:"🗣️",fr:"Demande l’heure à ton camarade.",aid:"askTime",pattern:"asktime"}
+  ]
+ },
+ days:{
+  title:"Les jours de la semaine",icon:"📅",goalAid:"goalDays",vocab:DAYS,
+  dialogue:[
+   {speaker:"Lina",role:"A",fr:"Le club photo, c’est quel jour ?",aid:"dDays1"},
+   {speaker:"Sami",role:"B",fr:"Le mercredi.",aid:"dDays2"},
+   {speaker:"Lina",role:"A",fr:"Et demain, c’est quel jour ?",aid:"dDays3"},
+   {speaker:"Sami",role:"B",fr:"Demain, c’est jeudi.",aid:"dDays4"}
+  ],
+  quiz:{fr:"Quel jour a lieu le club photo ?",aid:"qDays",options:["Le mercredi.","En mai.","Il pleut."],correct:0},
+  repeat:{fr:"Demain, c’est jeudi.",aid:"repeatDays",pattern:"weekday_thu"},
+  turns:[
+   {fr:"Le club photo, c’est quel jour ?",aid:"dDays1",target:"Le mercredi.",hintAid:"dDays2",pattern:"weekday_wed"},
+   {fr:"Aujourd’hui, c’est mardi. Demain, c’est quel jour ?",aid:"qDayAid",target:"Mercredi.",hintAid:"w_wed",pattern:"weekday_wed"}
+  ],
+  final:[
+   {icon:"📆",fr:"Aujourd’hui, c’est mardi. Dis le jour de demain.",aid:"finalDay",pattern:"weekday_wed"},
+   {icon:"🏀",fr:"Ton club a lieu le mercredi. Dis le jour.",aid:"dDays2",pattern:"weekday_wed"},
+   {icon:"🗣️",fr:"Demande quel jour a lieu une activité.",aid:"dDays1",pattern:"askday"}
+  ]
+ },
+ months:{
+  title:"Les mois et les dates",icon:"🗓️",goalAid:"goalMonths",vocab:MONTHS,
+  dialogue:[
+   {speaker:"Sam",role:"A",fr:"C’est quand, le séjour scolaire ?",aid:"dMonths1"},
+   {speaker:"Noé",role:"B",fr:"Le 14 mai.",aid:"dMonths2"},
+   {speaker:"Sam",role:"A",fr:"Et à quelle heure on se retrouve ?",aid:"dMonths3"},
+   {speaker:"Noé",role:"B",fr:"À deux heures de l’après-midi.",aid:"dMonths4"}
+  ],
+  quiz:{fr:"Quel mois vient après mars ?",aid:"qMonths",options:["Avril.","Mardi.","L’hiver."],correct:0},
+  repeat:{fr:"Le séjour est en mai.",aid:"repeatMonths",pattern:"month_may"},
+  turns:[
+   {fr:"Le séjour scolaire est en quel mois ?",aid:"dMonths1",target:"En mai.",hintAid:"dMonths2",pattern:"month_may"},
+   {fr:"Quelle est la date du séjour ?",aid:"dMonths1",target:"Le 14 mai.",hintAid:"dMonths2",pattern:"date_may14"}
+  ],
+  final:[
+   {icon:"🗓️",fr:"Quel mois vient après avril ? Réponds.",aid:"finalMonth",pattern:"month_may"},
+   {icon:"🚌",fr:"La sortie est en mai. Dis le mois.",aid:"dMonths2",pattern:"month_may"},
+   {icon:"🗣️",fr:"Demande le mois d’une sortie.",aid:"dMonths1",pattern:"askmonth"}
+  ]
+ },
+ weather:{
+  title:"Les saisons et la météo",icon:"🌦️",goalAid:"goalWeather",vocab:WEATHER_WORDS,
+  dialogue:[
+   {speaker:"Lina",role:"A",fr:"Quel temps fait-il aujourd’hui ?",aid:"dWeather1"},
+   {speaker:"Sami",role:"B",fr:"Il fait froid et il pleut.",aid:"dWeather2"},
+   {speaker:"Lina",role:"A",fr:"On joue dehors ?",aid:"dWeather3"},
+   {speaker:"Sami",role:"B",fr:"Non, on va à la bibliothèque.",aid:"dWeather4"}
+  ],
+  quiz:{fr:"Quel temps fait-il ?",aid:"qWeather",options:["Il pleut.","On est mardi.","Il est huit heures."],correct:0},
+  repeat:{fr:"Aujourd’hui, il pleut.",aid:"repeatWeather",pattern:"weather_rain"},
+  turns:[
+   {fr:"Regarde : 🌧️. Quel temps fait-il ?",aid:"qWeather",target:"Il pleut.",hintAid:"w_rain",pattern:"weather_rain"},
+   {fr:"Il pleut. On va au parc ?",aid:"dWeather3",target:"Non, on va à la bibliothèque.",hintAid:"dWeather4",pattern:"indoor"}
+  ],
+  final:[
+   {icon:"🌧️",fr:"Regarde l’image. Annonce le temps.",aid:"finalWeather",pattern:"weather_rain"},
+   {icon:"❄️",fr:"Dis une phrase avec la saison : hiver.",aid:"s_winter",pattern:"winter"},
+   {icon:"🏠",fr:"Il pleut. Propose un lieu à l’abri.",aid:"finalPlan3",pattern:"indoor"}
+  ]
+ },
+ plan:{
+  title:"Organiser une sortie",icon:"🤝",goalAid:"goalPlan",
+  vocab:[
+   {face:"SAMEDI",fr:"samedi",aid:"w_sat",icon:"📅"},
+   {face:"18 AVRIL",fr:"le 18 avril",aid:"planDate",icon:"🗓️"},
+   {face:"10:00",fr:"à dix heures",aid:"planTime",icon:"🕙"},
+   {face:"🌧️",fr:"Il va pleuvoir.",aid:"planRain",icon:"🌧️"},
+   {face:"À L’ABRI",fr:"la bibliothèque",aid:"planIndoor",icon:"📚"}
+  ],
+  dialogue:[
+   {speaker:"Lina",role:"A",fr:"On se retrouve quand pour la sortie ?",aid:"dPlan1"},
+   {speaker:"Sami",role:"B",fr:"Samedi 18 avril, à dix heures.",aid:"dPlan2"},
+   {speaker:"Lina",role:"A",fr:"Quel temps est annoncé ?",aid:"dPlan3"},
+   {speaker:"Sami",role:"B",fr:"Il va pleuvoir.",aid:"dPlan4"},
+   {speaker:"Lina",role:"A",fr:"Alors, on va à la bibliothèque.",aid:"dPlan5"}
+  ],
+  quiz:{fr:"Il va pleuvoir. Où peut-on aller ?",aid:"qPlan",options:["À la bibliothèque.","Au parc."],correct:0},
+  repeat:{fr:"On se retrouve samedi à dix heures.",aid:"repeatPlan",pattern:"schedule"},
+  turns:[
+   {fr:"Propose un rendez-vous : samedi, 18 avril, 10 h.",aid:"finalPlan1",target:"On se retrouve samedi 18 avril à dix heures.",hintAid:"repeatPlan",pattern:"schedule"},
+   {fr:"Regarde : 🌧️. Quel temps est annoncé ?",aid:"finalPlan2",target:"Il va pleuvoir.",hintAid:"planRain",pattern:"weather_rain"},
+   {fr:"Alors, tu proposes quoi ?",aid:"dWeather3",target:"On va à la bibliothèque.",hintAid:"planIndoor",pattern:"indoor"}
+  ],
+  final:[
+   {icon:"🗓️",fr:"Propose le jour, la date et l’heure : samedi 18 avril, 10 h.",aid:"finalPlan1",pattern:"schedule"},
+   {icon:"🌧️",fr:"Dis le temps annoncé.",aid:"finalPlan2",pattern:"weather_rain"},
+   {icon:"📚",fr:"Propose un lieu à l’abri.",aid:"finalPlan3",pattern:"indoor"}
+  ]
+ }
+};
+let language="ar",viewStack=["view-language"],lessonId="time",step=0,roleTurn=0,finalTurn=0;
+let quizPassed=false,practicePassed=false,rolePassed=false,finalPassed=false,showSupport=true,attemptText="",completed={};
+let mediaRecorder=null,mediaStream=null,mediaChunks=[],recordUrl="",toastTimer=0;
+const $=id=>document.getElementById(id);
+const T=()=>L1[language]||L1.ar;
+const txt=key=>T().text[key]||"";
+const currentView=()=>viewStack[viewStack.length-1]||"view-language";
+function el(tag,cls,text){const n=document.createElement(tag);if(cls)n.className=cls;if(text!==undefined)n.textContent=text;return n;}
+function aidNode(key,cls="support"){const n=el("span",cls,txt(key));n.lang=language;n.dir=T().dir;return n;}
+function button(label,action,cls="secondary"){const b=document.createElement("button");b.type="button";b.className=cls;b.dataset.action=action;b.textContent=T().ui[label]||label;b.lang=language;b.dir=T().dir;return b;}
+function applyLanguage(){
+ document.documentElement.lang="fr";
+ document.querySelectorAll("[data-aid]").forEach(n=>{n.textContent=txt(n.dataset.aid);n.lang=language;n.dir=T().dir;});
+ document.querySelectorAll("[data-ui]").forEach(n=>{n.textContent=T().ui[n.dataset.ui]||"";n.lang=language;n.dir=T().dir;});
+ const c=$("current-language");c.textContent=T().name;c.lang=language;c.dir=T().dir;
+}
+function showView(id){
+ const target=$(id);if(!target)return;
+ document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
+ target.classList.add("active");$("navigation").hidden=id==="view-language";
+ $("main").scrollTo({top:0,behavior:"smooth"});
+ const h=target.querySelector("h1");if(h){h.setAttribute("tabindex","-1");h.focus({preventScroll:true});}
+}
+function go(id){if(currentView()!==id)viewStack.push(id);showView(id);}
+function selectLanguage(code){
+ if(!L1[code])return;language=code;applyLanguage();
+ if(currentView()==="view-language"){viewStack=viewStack.length>1?viewStack.slice(0,-1):["view-home"];if(currentView()==="view-language")viewStack=["view-home"];}
+ if(currentView()==="view-lesson")renderLesson();showView(currentView());
+}
+function startLesson(id){
+ if(!LESSONS[id])return;stopAudio();lessonId=id;step=0;roleTurn=0;finalTurn=0;
+ quizPassed=false;practicePassed=false;rolePassed=false;finalPassed=false;showSupport=true;attemptText="";
+ if(recordUrl){URL.revokeObjectURL(recordUrl);recordUrl="";}
+ viewStack=["view-home","view-lesson"];renderLesson();showView("view-lesson");
+}
+function goHome(){stopAudio();viewStack=["view-home"];renderHome();showView("view-home");}
+function goBack(){
+ if(currentView()==="view-language"&&viewStack.length>1){viewStack.pop();showView(currentView());return;}
+ if(currentView()==="view-lesson"&&step>0){step--;showSupport=step<=1;attemptText="";renderLesson();showView("view-lesson");return;}
+ if(viewStack.length>1){viewStack.pop();if(currentView()==="view-lesson")renderLesson();showView(currentView());}
+}
+function renderHome(){document.querySelectorAll(".mission").forEach(b=>b.classList.toggle("done",!!completed[b.dataset.start]));}
+function renderLesson(){
+ const l=LESSONS[lessonId],content=$("lesson-content"),actions=$("lesson-actions");
+ content.replaceChildren();actions.replaceChildren();
+ $("mission-name").textContent=l.icon+"  "+l.title;
+ $("step-count").textContent=(step+1)+" / 6";$("progress-fill").style.width=((step+1)/6*100)+"%";
+ const titles=["Je découvre les mots","J’écoute le dialogue","Je comprends","Je répète","Je dialogue","À toi de parler"];
+ const guides=["Écoute les mots et observe les exemples.","Écoute les répliques. Ouvre l’aide si tu en as besoin.","Choisis la réponse qui correspond au dialogue.","Écoute le modèle, puis répète à voix haute.","Réponds à ton partenaire. Tu peux demander un indice.","Fais le défi sans lire tout le modèle."];
+ const keys=["guideVocab","guideListen","guideQuiz","guideRepeat","guideRole","guideFinal"];
+ $("lesson-title").textContent=titles[step];$("lesson-guide").textContent=guides[step];
+ $("lesson-guide-aid").replaceChildren(aidNode(keys[step]));
+ if(step===0)renderVocab(l,content,actions);
+ if(step===1)renderDialogue(l,content,actions);
+ if(step===2)renderQuiz(l,content,actions);
+ if(step===3)renderPractice(l,content,actions);
+ if(step===4)renderRoleplay(l,content,actions);
+ if(step===5)renderFinal(l,content,actions);
+}
+function renderVocab(l,content,actions){
+ const grid=el("div","vocab-grid");
+ l.vocab.forEach((item,i)=>{
+  const card=el("div","vocab-card");
+  card.appendChild(el("div","vocab-face",(item.icon?item.icon+" ":"")+item.face));
+  card.appendChild(el("div","vocab-fr",item.fr));
+  const aid=aidNode(item.aid);aid.hidden=!showSupport;card.appendChild(aid);
+  const controls=el("div","vocab-controls");
+  const fr=el("button","icon-button","🔊");fr.type="button";fr.setAttribute("aria-label",T().ui.listen+" : "+item.fr);fr.dataset.action="speak-vocab";fr.dataset.index=String(i);controls.appendChild(fr);
+  const l1=el("button","icon-button","🌐");l1.type="button";l1.setAttribute("aria-label",T().ui.listenAid);l1.dataset.action="speak-vocab-aid";l1.dataset.index=String(i);controls.appendChild(l1);
+  card.appendChild(controls);grid.appendChild(card);
+ });
+ content.appendChild(grid);content.appendChild(el("p","vocab-note","🔊 Français　　🌐 Langue d’appui"));
+ content.appendChild(button(showSupport?"hide":"help","toggle-support","toggle-help"));
+ content.appendChild(aidNode("guideVocab"));actions.appendChild(button("next","next","primary"));
+}
+function renderDialogue(l,content,actions){
+ const card=el("div","dialogue-card");
+ l.dialogue.forEach((line,i)=>{
+  const row=el("div","dialogue-line"),av=el("span","avatar"+(line.role==="B"?" alt":""),line.role==="A"?"A":"B");
+  av.setAttribute("aria-hidden","true");row.appendChild(av);
+  const copy=el("div","");copy.appendChild(el("div","line-meta",line.speaker));copy.appendChild(el("div","line-fr",line.fr));
+  const aid=aidNode(line.aid);aid.hidden=!showSupport;copy.appendChild(aid);row.appendChild(copy);
+  const fr=el("button","icon-button","🔊");fr.type="button";fr.setAttribute("aria-label",T().ui.listen+" "+(i+1));fr.dataset.action="speak-line";fr.dataset.index=String(i);row.appendChild(fr);
+  const l1=el("button","icon-button","🌐");l1.type="button";l1.setAttribute("aria-label",T().ui.listenAid);l1.dataset.action="speak-line-aid";l1.dataset.index=String(i);row.appendChild(l1);
+  card.appendChild(row);
+ });
+ content.appendChild(card);content.appendChild(button(showSupport?"hide":"help","toggle-support","toggle-help"));
+ actions.appendChild(button("listenAll","listen-all","audio-button"));actions.appendChild(button("next","next","primary"));
+}
+function renderQuiz(l,content,actions){
+ const q=l.quiz,card=el("div","question-card");card.appendChild(el("div","kicker","ÉCOUTE LA QUESTION"));
+ card.appendChild(el("p","question-fr",q.fr));const aid=aidNode(q.aid);aid.hidden=!showSupport;card.appendChild(aid);
+ const choices=el("div","choice-list");
+ q.options.forEach((x,i)=>{const b=el("button","choice","");b.type="button";b.dataset.action="quiz-choice";b.dataset.index=String(i);b.appendChild(el("span","choice-mark",String.fromCharCode(65+i)));b.appendChild(el("span","",x));choices.appendChild(b);});
+ card.appendChild(choices);const fb=el("div","feedback");fb.id="quiz-feedback";fb.hidden=true;card.appendChild(fb);
+ content.appendChild(card);content.appendChild(button(showSupport?"hide":"help","toggle-support","toggle-help"));
+ actions.appendChild(button("listen","speak-question","audio-button"));if(quizPassed)actions.appendChild(button("next","next","primary"));
+}
+function renderPractice(l,content,actions){
+ const card=el("div","card");card.appendChild(el("div","kicker","À TOI"));card.appendChild(el("p","lead","Écoute le modèle et dis la phrase."));
+ card.appendChild(el("div","model-box",l.repeat.fr));const aid=aidNode(l.repeat.aid,"model-l1");aid.hidden=!showSupport;card.appendChild(aid);
+ card.appendChild(button(showSupport?"hide":"help","toggle-support","toggle-help"));
+ const mic=button("speak","voice","mic-button");mic.id="voice-button";card.appendChild(mic);
+ const tr=el("div","transcript",attemptText);tr.id="speech-output";tr.setAttribute("aria-live","polite");card.appendChild(tr);
+ const fb=el("div","feedback");fb.id="voice-feedback";fb.hidden=true;card.appendChild(fb);
+ const audio=el("div","");audio.id="recorded-audio";card.appendChild(audio);content.appendChild(card);
+ actions.appendChild(button("listen","speak-model","audio-button"));if(practicePassed)actions.appendChild(button("next","next","primary"));
+}
+function renderRoleplay(l,content,actions){
+ const turn=l.turns[roleTurn];
+ if(!turn){rolePassed=true;content.appendChild(el("div","feedback","Très bien, tu as répondu à ton partenaire."));actions.appendChild(button("next","next","primary"));return;}
+ const card=el("div","turn-card");card.appendChild(el("span","turn-label","RÉPLIQUE "+(roleTurn+1)+" / "+l.turns.length));
+ card.appendChild(el("div","turn-prompt",turn.fr));const aid=aidNode(turn.aid,"support turn-l1");aid.hidden=!showSupport;card.appendChild(aid);
+ const controls=el("div","turn-controls");controls.appendChild(button("listen","speak-turn","audio-button"));controls.appendChild(button(showSupport?"hide":"help","toggle-support","hint-button"));card.appendChild(controls);
+ const model=el("div","model-box",turn.target);model.id="turn-hint";model.hidden=!showSupport;card.appendChild(model);
+ const modelAid=aidNode(turn.hintAid,"model-l1");modelAid.hidden=!showSupport;card.appendChild(modelAid);
+ const mic=button("speak","voice","mic-button");mic.id="voice-button";card.appendChild(mic);
+ const tr=el("div","transcript",attemptText);tr.id="speech-output";card.appendChild(tr);
+ const fb=el("div","feedback");fb.id="voice-feedback";fb.hidden=true;card.appendChild(fb);
+ const rec=el("div","");rec.id="recorded-audio";card.appendChild(rec);content.appendChild(card);
+ if(rolePassed)actions.appendChild(button("next","role-next","primary"));
+}
+function renderFinal(l,content,actions){
+ const prompts=l.final;
+ if(finalTurn>=prompts.length){
+  finalPassed=true;const card=el("div","card");card.appendChild(el("div","kicker","DÉFI RÉUSSI"));
+  card.appendChild(el("p","lead","Tu as parlé sans lire tout le dialogue."));
+  const checks=el("div","self-list");
+  ["Je peux répondre à une question.","Je peux dire une information utile.","Je peux proposer une idée."].forEach(x=>{const label=el("label","self-row"),input=document.createElement("input");input.type="checkbox";label.appendChild(input);label.appendChild(el("span","",x));checks.appendChild(label);});
+  card.appendChild(checks);card.appendChild(aidNode("guideSelf"));content.appendChild(card);
+  actions.appendChild(button("done","finish","primary"));return;
+ }
+ const current=prompts[finalTurn],card=el("div","card");
+ card.appendChild(el("div","kicker","DÉFI FINAL · "+(finalTurn+1)+" / "+prompts.length));
+ const cues=el("div","final-cues");
+ prompts.forEach((p,i)=>{const cue=el("div","cue");cue.appendChild(el("span","cue-icon",p.icon));cue.appendChild(el("span","cue-label",i===finalTurn?"À toi":i<finalTurn?"✓":"…"));cue.style.opacity=i<=finalTurn?"1":".48";cues.appendChild(cue);});
+ card.appendChild(cues);card.appendChild(el("div","turn-prompt",current.fr));
+ const aid=aidNode(current.aid);aid.hidden=!showSupport;card.appendChild(aid);
+ card.appendChild(button(showSupport?"hide":"help","toggle-support","toggle-help"));
+ const mic=button("speak","voice","mic-button");mic.id="voice-button";card.appendChild(mic);
+ const tr=el("div","transcript",attemptText);tr.id="speech-output";card.appendChild(tr);
+ const fb=el("div","feedback");fb.id="voice-feedback";fb.hidden=true;card.appendChild(fb);
+ const rec=el("div","");rec.id="recorded-audio";card.appendChild(rec);content.appendChild(card);
+}
+function startNext(){
+ if(step===2&&!quizPassed){flash(txt("tryAgain"));return;}
+ if(step===3&&!practicePassed){flash(txt("tryAgain"));return;}
+ if(step===4&&!rolePassed){flash(txt("tryAgain"));return;}
+ if(step<5){step++;roleTurn=0;finalTurn=0;attemptText="";showSupport=step<=1;renderLesson();$("main").scrollTo({top:0,behavior:"smooth"});$("lesson-title").focus({preventScroll:true});}
+}
+function toggleSupport(){showSupport=!showSupport;renderLesson();}
+function quizChoice(btn){
+ const l=LESSONS[lessonId],ok=Number(btn.dataset.index)===l.quiz.correct;
+ document.querySelectorAll(".choice").forEach(x=>x.classList.remove("correct","wrong"));btn.classList.add(ok?"correct":"wrong");
+ const fb=$("quiz-feedback");fb.replaceChildren();fb.className="feedback"+(ok?"":" error");
+ fb.appendChild(el("p","",ok?txt("good"):txt("tryAgain")));if(!ok)fb.appendChild(aidNode(l.quiz.aid));
+ fb.hidden=false;
+ if(ok){quizPassed=true;if(!$("lesson-actions").querySelector('[data-action="next"]'))$("lesson-actions").appendChild(button("next","next","primary"));}
+}
+function norm(s){return(s||"").toLocaleLowerCase("fr-FR").normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[’']/g," ").replace(/[.,!?;:]/g," ").replace(/\s+/g," ").trim();}
+function expected(pattern,text){
+ const s=norm(text);
+ const tests={
+  time830:/(8\s*h?\s*30|8 heures? 30|huit heures? (?:trente|et demie)|huit trente)/,
+  time900:/(^| )(9|neuf)( |$| heures?)/,
+  weekday_wed:/mercredi/,weekday_thu:/jeudi/,
+  month_may:/(^| )mai( |$)/,month_july:/juillet/,
+  date_may14:/(14|quatorze)/.test(s)&&/(^| )mai( |$)/.test(s),
+  weather_rain:/(pluie|pleut|pleuvoir|pleuvra)/,indoor:/(bibliotheque|cinema|maison|salle)/,
+  winter:/hiver/,asktime:/(quelle heure|heure est il|heure)/,askday:/(quel jour|quelle jour)/,askmonth:/(quel mois|quelle mois)/
+ };
+ if(pattern==="schedule")return /samedi/.test(s)&&/avril/.test(s)&&/(10|dix)/.test(s);
+ if(pattern==="date_may14")return tests.date_may14;
+ if(pattern==="month_may")return tests.month_may.test(s);
+ const re=tests[pattern];return re?re.test(s):s.length>1;
+}
+function voiceTarget(){const l=LESSONS[lessonId];if(step===3)return l.repeat;if(step===4)return l.turns[roleTurn];if(step===5)return l.final[finalTurn];return null;}
+function setMic(active){const b=$("voice-button");if(!b)return;b.classList.toggle("recording",active);b.textContent=T().ui[active?"stop":"speak"];}
+function startVoice(){
+ if(mediaRecorder&&mediaRecorder.state==="recording"){mediaRecorder.stop();return;}
+ const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+ if(SR){const r=new SR();r.lang="fr-FR";r.interimResults=false;r.maxAlternatives=1;setMic(true);r.onresult=e=>handleSpeech(e.results[0][0].transcript);r.onerror=()=>{setMic(false);showManualDone();};r.onend=()=>setMic(false);try{r.start();}catch(e){setMic(false);showManualDone();}return;}
+ startLocalRecording();
+}
+async function startLocalRecording(){
+ if(!navigator.mediaDevices?.getUserMedia||typeof MediaRecorder==="undefined"){flash("Le micro n’est pas disponible ici.");showManualDone();return;}
+ try{
+  mediaStream=await navigator.mediaDevices.getUserMedia({audio:true});mediaChunks=[];mediaRecorder=new MediaRecorder(mediaStream);
+  mediaRecorder.ondataavailable=e=>{if(e.data?.size)mediaChunks.push(e.data);};
+  mediaRecorder.onstop=()=>{
+   mediaStream.getTracks().forEach(t=>t.stop());mediaStream=null;if(recordUrl)URL.revokeObjectURL(recordUrl);
+   recordUrl=URL.createObjectURL(new Blob(mediaChunks,{type:mediaRecorder.mimeType||"audio/webm"}));
+   const host=$("recorded-audio");if(host){host.replaceChildren();const audio=document.createElement("audio");audio.controls=true;audio.src=recordUrl;audio.setAttribute("aria-label",T().ui.playback);host.appendChild(audio);}
+   setMic(false);showManualDone();
+  };
+  mediaRecorder.start();setMic(true);
+ }catch(e){flash("Autorise le micro dans les réglages du navigateur.");showManualDone();}
+}
+function showManualDone(){const host=$("lesson-actions");if(host&&!host.querySelector('[data-action="manual-done"]'))host.appendChild(button("done","manual-done","secondary"));}
+function handleSpeech(text){
+ attemptText=text;const output=$("speech-output");if(output)output.textContent=text;
+ const target=voiceTarget();if(!target)return;const ok=expected(target.pattern,text),fb=$("voice-feedback");
+ if(fb){fb.replaceChildren();fb.className="feedback"+(ok?"":" error");fb.appendChild(el("p","",ok?txt("good"):txt("tryAgain")));if(!ok){fb.appendChild(aidNode(target.hintAid||target.aid||target.key||"guideRepeat"));const modelText=target.target||target.fr;if(modelText)fb.appendChild(el("div","model-box",modelText));showSupport=true;}fb.hidden=false;}
+ if(ok)markVoiceSuccess();
+}
+function markVoiceSuccess(){
+ if(step===3)practicePassed=true;else if(step===4)rolePassed=true;else if(step===5){finalTurn++;finalPassed=finalTurn>=LESSONS[lessonId].final.length;attemptText="";renderLesson();}
+ const actions=$("lesson-actions");
+ if(step===3&&!actions.querySelector('[data-action="next"]'))actions.appendChild(button("next","next","primary"));
+ if(step===4&&!actions.querySelector('[data-action="role-next"]'))actions.appendChild(button("next","role-next","primary"));
+}
+function manualSpoken(){const target=voiceTarget();if(!target)return;const fb=$("voice-feedback");if(fb){fb.replaceChildren();fb.className="feedback";fb.appendChild(el("p","",txt("manual")));fb.hidden=false;}markVoiceSuccess();}
+function nextRole(){rolePassed=false;roleTurn++;attemptText="";showSupport=false;renderLesson();$("main").scrollTo({top:0,behavior:"smooth"});}
+function speakText(text,lang="fr",speaker="narrator"){
+ const languageCode=GOOGLE_TTS_CODES[lang]||"fr-FR";
+ if(typeof window.OEPRE_GOOGLE_TTS==="function")return Promise.resolve(window.OEPRE_GOOGLE_TTS({text,languageCode,speakingRate:.88,speaker})).catch(()=>browserSpeak(text,lang));
+ return browserSpeak(text,lang);
+}
+function browserSpeak(text,lang){
+ if(!("speechSynthesis"in window)||typeof SpeechSynthesisUtterance==="undefined"){flash("La voix n’est pas disponible dans ce navigateur.");return Promise.resolve();}
+ window.speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.lang=BROWSER_CODES[lang]||"fr-FR";u.rate=.88;
+ const voices=window.speechSynthesis.getVoices?.()||[],base=u.lang.toLowerCase().split("-")[0],voice=voices.find(v=>v.lang&&v.lang.toLowerCase().split("-")[0]===base);if(voice)u.voice=voice;
+ return new Promise(resolve=>{u.onend=resolve;u.onerror=resolve;window.speechSynthesis.speak(u);});
+}
+async function speakDialogue(){for(const line of LESSONS[lessonId].dialogue){await speakText(line.fr,"fr",line.role);await new Promise(r=>setTimeout(r,180));}}
+function stopAudio(){if(window.speechSynthesis)window.speechSynthesis.cancel();if(mediaRecorder?.state==="recording")mediaRecorder.stop();}
+function flash(text){const s=$("status");s.textContent=text;s.classList.add("show");clearTimeout(toastTimer);toastTimer=setTimeout(()=>s.classList.remove("show"),3000);}
+function finishLesson(){completed[lessonId]=true;step=0;roleTurn=0;finalTurn=0;attemptText="";viewStack.push("view-finish");showView("view-finish");renderHome();}
+document.addEventListener("click",event=>{
+ const languageBtn=event.target.closest("[data-language]");if(languageBtn){selectLanguage(languageBtn.dataset.language);return;}
+ const start=event.target.closest("[data-start]");if(start){startLesson(start.dataset.start);return;}
+ const choice=event.target.closest('[data-action="quiz-choice"]');if(choice){quizChoice(choice);return;}
+ const target=event.target.closest("[data-action]");if(!target)return;const a=target.dataset.action;
+ if(a==="back")goBack();if(a==="home")goHome();if(a==="language")go("view-language");
+ if(a==="next")startNext();if(a==="finish")finishLesson();if(a==="restart")startLesson(lessonId);
+ if(a==="toggle-support")toggleSupport();if(a==="role-next")nextRole();if(a==="voice")startVoice();if(a==="manual-done")manualSpoken();
+ if(a==="listen-all")speakDialogue();if(a==="speak-question")speakText(LESSONS[lessonId].quiz.fr,"fr","narrator");
+ if(a==="speak-model")speakText(LESSONS[lessonId].repeat.fr,"fr","model");
+ if(a==="speak-turn")speakText(LESSONS[lessonId].turns[roleTurn].fr,"fr","partner");
+ if(a==="speak-line"){const line=LESSONS[lessonId].dialogue[Number(target.dataset.index)];if(line)speakText(line.fr,"fr",line.role);}
+ if(a==="speak-line-aid"){const line=LESSONS[lessonId].dialogue[Number(target.dataset.index)];if(line)speakText(txt(line.aid),language,"translation");}
+ if(a==="speak-vocab"){const item=LESSONS[lessonId].vocab[Number(target.dataset.index)];if(item)speakText(item.fr,"fr","model");}
+ if(a==="speak-vocab-aid"){const item=LESSONS[lessonId].vocab[Number(target.dataset.index)];if(item)speakText(txt(item.aid),language,"translation");}
+});
+applyLanguage();renderHome();showView("view-language");
+if("serviceWorker"in navigator&&/^https?:$/.test(location.protocol))navigator.serviceWorker.register("./sw.js").catch(()=>{});
+</script>
+</body></html>
